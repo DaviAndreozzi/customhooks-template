@@ -5,33 +5,14 @@ import {Title,NameContainer,PostContainer } from './style'
 import { GlobalStyle } from './GlobalStyle'
 import { Header } from './components/Header/Header'
 import { Card } from './components/Card/Card'
+import { useCapturarNome } from "./hook/useCapturarNome";
+import { useCapturarPostagem } from "./hook/useCapturaPostagem";
+import { useBuscarDados } from "./hook/useBuscarDados";
 function App() {
-  const [nomeUsuarios, setNomeUsuarios] = useState([]);
-  const [postagens, setPostagens] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`${BASE_URL}users`)
-      .then((response) => {
-        setNomeUsuarios(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
-
-
-  useEffect(() => {
-    axios
-      .get(`${BASE_URL}comments`)
-      .then((response) => {
-        setPostagens(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  });
-
+  // const nomeUsuarios = useCapturarNome();
+  // const postagens = useCapturarPostagem();
+  const nomeUsuarios = useBuscarDados(`${BASE_URL}users`,[])
+  const postagens = useBuscarDados(`${BASE_URL}users`,[])
   return (
     <div>
       <GlobalStyle />
